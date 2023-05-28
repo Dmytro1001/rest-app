@@ -8,15 +8,14 @@ const {
   validateBody,
   validateStatusBody,
   isValidId,
+  authenticate,
 } = require("../../decorators");
 
 const router = express.Router();
 
-router.get(
-  "/",
+router.use(authenticate);
 
-  contactsController.getAllContacts
-);
+router.get("/", contactsController.getAllContacts);
 
 router.get("/:contactId", isValidId, contactsController.getContactById);
 
