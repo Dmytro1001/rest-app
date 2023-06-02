@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-const phonePattern = /^\(\d{3}\)\s\d{3}-\d{4}$/;
+// const phonePattern = /^\(\d{3}\)\s\d{3}-\d{4}$/;
 
 const contactAddSchema = Joi.object({
   name: Joi.string()
@@ -13,7 +13,7 @@ const contactAddSchema = Joi.object({
     .email()
     .messages({ "any.required": "missing required email field" }),
   phone: Joi.string()
-    .pattern(phonePattern)
+    // .pattern(phonePattern)
     .required()
     .messages({ "any.required": "missing required phone field" }),
   favorite: Joi.boolean(),
@@ -25,9 +25,9 @@ const updateFavoriteSchema = Joi.object({
     .messages({ "any.required": "missing field favorite" }),
 });
 
-const schemas = {
+module.exports = {
   contactAddSchema,
   updateFavoriteSchema,
 };
 
-module.exports = schemas;
+// module.exports = contactAddSchema;
