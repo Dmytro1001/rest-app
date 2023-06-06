@@ -2,9 +2,7 @@ const express = require("express");
 
 const ctrl = require("../../controllers/auth-controllers");
 
-const { authenticate } = require("../../decorators");
-
-const { validateBody } = require("../../decorators");
+const { authenticate, validateBody, upload } = require("../../decorators");
 
 const schemas = require("../../schemas");
 
@@ -24,6 +22,13 @@ router.patch(
   validateBody(schemas.updateSubscribeSchema),
   authenticate,
   ctrl.changeSubscription
+);
+
+router.patch(
+  "/avatars",
+  authenticate,
+  upload.single("avatarURL"),
+  ctrl.changeAvatar
 );
 
 module.exports = router;
